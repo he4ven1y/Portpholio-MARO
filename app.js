@@ -255,11 +255,14 @@ function initVibeSystem() {
             ctx.save();
             ctx.translate(this.currentX, this.y);
             ctx.rotate(this.rotation);
-            ctx.globalAlpha = this.opacity;
-
-            if (this.blur > 0) {
-                ctx.filter = `blur(${this.blur}px)`;
-            }
+            
+            // Оптимизация производительности: 
+            // Заменяем тяжелый ctx.filter(blur) на иллюзию глубины через прозрачность
+            let depthAlpha = this.opacity;
+            if (this.z === 0) depthAlpha *= 0.5; // Дальний план полупрозрачный
+            else if (this.z === 2) depthAlpha *= 0.8; // Самый ближний план (расфокус)
+            
+            ctx.globalAlpha = depthAlpha;
 
             if (this.config.type === 'path') {
                 ctx.fillStyle = this.color;
@@ -267,11 +270,18 @@ function initVibeSystem() {
                 ctx.scale(scaleFactor, scaleFactor);
                 ctx.fill(this.config.path);
             } else if (this.config.type === 'radial') {
-                const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
-                grad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
-                grad.addColorStop(0.3, this.color);
-                grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                ctx.fillStyle = grad;
+                // Оптимизация снега: вместо тяжелого createRadialGradient каждый кадр 
+                // рисуем мягкий снежок двумя простыми кругами
+                
+                // Центр снежинки (плотный)
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Ореол снежинки (мягкий)
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = depthAlpha * 0.4;
                 ctx.beginPath();
                 ctx.arc(0, 0, this.size, 0, Math.PI * 2);
                 ctx.fill();
