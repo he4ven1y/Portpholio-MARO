@@ -1,0 +1,966 @@
+/* ==========================================
+   ДИЗАЙН-СИСТЕМА (Минималистичные CSS Переменные)
+   ========================================== */
+:root {
+    /* ЛЕТО (Береза) - по умолчанию */
+    --bg-color: #e3ede8;          /* Глубокий мшистый/шалфейный */
+    --card-bg: #ffffff;           /* Чистый белый */
+    --card-border: rgba(27, 38, 32, 0.08);
+    --card-border-hover: rgba(27, 38, 32, 0.15);
+    --text-primary: #1f2c25;      /* Темно-зеленый/почти черный */
+    --text-secondary: #496253;    /* Серо-оливковый */
+    --accent: #8ebfa4;            /* Шалфейный акцент */
+    --accent-light: #f0f5f2;      /* Светлый мятный фон */
+    
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.vibe-spring {
+    --bg-color: #e8dcdc;          /* Пыльная роза с теплым подтоном */
+    --text-primary: #362121;      /* Глубокий коричнево-бордовый */
+    --text-secondary: #6b4b4b;    /* Приглушенный розовато-коричневый */
+    --accent: #d49a9a;            /* Нежно-розовая сакура */
+    --card-border: rgba(54, 33, 33, 0.08);
+    --card-border-hover: rgba(54, 33, 33, 0.15);
+    --accent-light: #f5efef;
+}
+
+body.vibe-autumn {
+    --bg-color: #ebdccb;          /* Пастельный персиково-бежевый */
+    --text-primary: #3a2113;      /* Темная терракота / эспрессо */
+    --text-secondary: #6e4f3a;    /* Темно-глиняный */
+    --accent: #c97f53;            /* Осенний клен */
+    --card-border: rgba(58, 33, 19, 0.08);
+    --card-border-hover: rgba(58, 33, 19, 0.15);
+    --accent-light: #f6f0ea;
+}
+
+body.vibe-winter {
+    --bg-color: #f5f7f8;          /* Морозный белый/светло-серебристый */
+    --text-primary: #1e252b;      /* Графитовый */
+    --text-secondary: #4a5762;    /* Стальной серо-голубой */
+    --accent: #7da0b8;            /* Морозно-синий */
+    --card-border: rgba(30, 37, 43, 0.08);
+    --card-border-hover: rgba(30, 37, 43, 0.15);
+    --accent-light: #fafdff;
+}
+
+/* Плавные переходы для смены вайбов (сезонов) */
+body, 
+header, 
+footer, 
+a, 
+h1, h2, h3, 
+p, 
+span, 
+.glass-card, 
+.btn, 
+.browser-mockup,
+.browser-header,
+.browser-address,
+.project-stack-tags span,
+.copy-tooltip {
+    transition: background-color 1.2s ease-in-out, color 1.2s ease-in-out, border-color 1.2s ease-in-out, border-bottom 1.2s ease-in-out, box-shadow 1.2s ease-in-out;
+}
+
+/* ==========================================
+   БАЗОВЫЕ СТИЛИ И СБРОС
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    line-height: 1.7;
+    letter-spacing: -0.1px;
+}
+
+.container {
+    max-width: 1100px; /* Сделали чуть уже для более концентрированного минимализма */
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Скрываем светящиеся сферы */
+.blob {
+    display: none;
+}
+
+/* ==========================================
+   МИНИМАЛИСТИЧНАЯ НАВИГАЦИЯ
+   ========================================== */
+.glass-nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.65); /* Сделали стекло на 15% прозрачнее */
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(27, 38, 32, 0.02);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.75rem; /* Изменено под кратность 4 (28px) */
+    font-weight: 400; /* Обычное начертание, как у H1 */
+    font-style: normal; /* Прямой шрифт Антиквы взамен курсива */
+    color: var(--text-primary);
+    text-decoration: none; /* Убираем подчеркивание */
+    letter-spacing: -0.5px;
+    transition: var(--transition-smooth);
+}
+
+.logo:hover {
+    opacity: 0.75; /* Деликатный эффект наведения */
+}
+
+.logo span {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 600; /* Сбалансированный вес гротеска */
+    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+    text-transform: uppercase;
+    letter-spacing: 2.5px; /* Разрядка капса */
+    color: var(--accent);
+    margin-left: 8px; /* Изменено под кратность 4 (8px) */
+    vertical-align: middle;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    transition: var(--transition-smooth);
+}
+
+nav a:hover {
+    color: var(--text-primary);
+}
+
+/* ==========================================
+   ЭЛЕГАНТНЫЙ ГЛАВНЫЙ ЭКРАН (Hero)
+   ========================================== */
+.hero {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: row; /* Две колонки */
+    align-items: stretch; /* Растягиваем колонки для идеального выравнивания по высоте */
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 5rem 0 10rem 0; /* Увеличили нижний отступ для «воздуха» */
+}
+
+.hero-content {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.hero-photo-container {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end; /* Прижимаем фото к правому краю */
+    align-items: stretch; /* Растягиваем по высоте */
+    width: 100%;
+}
+
+.hero-photo-placeholder {
+    width: 320px;
+    height: auto; /* Высота подстраивается под высоту текстового блока на десктопе */
+    background: var(--accent-light);
+    border: 1px solid var(--card-border);
+    position: relative;
+    overflow: hidden; /* Скрываем картинку при увеличении */
+    transition: var(--transition-smooth);
+}
+
+.hero-photo-placeholder:hover {
+    border-color: var(--card-border-hover);
+    box-shadow: 0 15px 35px rgba(27, 38, 32, 0.05);
+}
+
+.hero-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.hero-photo-placeholder:hover .hero-photo-img {
+    transform: scale(1.04); /* Легкое интерактивное приближение портрета */
+}
+
+.badge {
+    background: var(--accent-light);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem; /* Изменено под кратность 4 (8px и 16px) */
+    border-radius: 0px;
+    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+    font-weight: 600;
+    margin-bottom: 1.75rem; /* Изменено под кратность 4 (28px) */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 5.5rem; /* Кратность 4 (88px) */
+    font-weight: 400;
+    line-height: 1.1;
+    margin-top: 0; /* Убираем верхнее поле для идеального выравнивания по верхнему краю */
+    margin-bottom: 2rem;
+    max-width: 900px;
+    color: var(--text-primary);
+    letter-spacing: -2.5px; /* Плотный эдиториал межбуквенный интервал */
+}
+
+.text-gradient {
+    font-style: italic;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent); /* Лаконичное подчеркивание вместо градиента */
+}
+
+.hero-subtitle {
+    font-size: 1.25rem; /* Изменено под кратность 4 (20px) */
+    color: var(--text-secondary);
+    max-width: 550px;
+    margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto; /* Прижимает кнопки к самому низу текстового блока */
+    margin-bottom: 0; /* Убираем нижнее поле для идеального выравнивания по нижней кромке */
+}
+
+/* ==========================================
+   КНОПКИ
+   ========================================== */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.25rem; /* Изменено под кратность 4 (16px и 36px) */
+    border-radius: 0px; /* Строго 0px - острые углы */
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    font-weight: 600; /* Смелый шрифт для лучшей доступности */
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: #ffffff;
+    border: 2px solid var(--text-primary); /* Уверенная толстая рамка */
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--text-primary);
+    transform: translateY(-4px); /* Изменено под кратность 4 */
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary); /* Изменено под кратность 4 */
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+    color: #ffffff;
+    transform: translateY(-4px); /* Изменено под кратность 4 */
+}
+
+/* ==========================================
+   ПОРТФОЛИО
+   ========================================== */
+.portfolio {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 2.75rem; /* Изменено под кратность 4 (44px) */
+    font-weight: 400;
+    margin-bottom: 2.5rem; /* Уменьшили нижний отступ, так как далее идут кнопки фильтров */
+}
+
+/* Фильтры и Сортировка портфолио */
+.portfolio-filters {
+    display: flex;
+    justify-content: space-between; /* Категории слева, сортировка справа */
+    align-items: center;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.sort-group {
+    display: flex;
+}
+
+.sort-btn {
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.95rem; /* Кратность 4 (15.2px -> 16px) */
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Кратность 4 */
+}
+
+.sort-btn:hover {
+    color: var(--text-primary);
+}
+
+.sort-btn::after {
+    content: '↓';
+    font-weight: 600;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.sort-btn.asc::after {
+    transform: rotate(180deg);
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem 0; /* Изменено под кратность 4 (4px) */
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: var(--text-primary);
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -16px; /* Изменено под кратность 4 (16px) */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.filter-btn.active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.filter-btn.active::after {
+    transform: scaleX(1);
+}
+
+.project-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem; /* Просторное расстояние между проектами */
+}
+
+/* Строка проекта (во всю ширину) */
+.project-row {
+    display: flex;
+    flex-direction: row;
+    gap: 3.5rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    padding: 2.5rem;
+    transition: var(--transition-smooth);
+}
+
+.project-row:hover {
+    border-color: var(--card-border-hover);
+    box-shadow: 0 15px 45px rgba(27, 38, 32, 0.03);
+    transform: translateY(-4px);
+}
+
+/* Скриншот-колонна */
+.project-image-wrapper {
+    flex: 1.3;
+    height: 380px; /* Увеличили высоту для масштабности */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    padding: 2.5rem 2.5rem 0 2.5rem; /* Паспарту */
+    transition: var(--transition-smooth);
+}
+
+/* Фоновые цвета подложки */
+.mockup-bg-mint {
+    background: #e2f0e9; /* Мягкий мятный фон */
+}
+
+.mockup-bg-gray {
+    background: #e8ece9; /* Светлый серо-зеленый фон */
+}
+
+.mockup-bg-sage {
+    background: #d6e2db; /* Мягкий шалфейно-зеленый фон */
+}
+
+.mockup-bg-sand {
+    background: #f0eae1; /* Мягкий персиково-песочный фон */
+}
+
+/* Браузерный мокап */
+.browser-mockup {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(27, 38, 32, 0.04);
+    transition: var(--transition-smooth);
+}
+
+/* Шапка браузера */
+.browser-header {
+    height: 28px; /* Кратность 4 (28px) */
+    background: #f1f3f2;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 12px; /* Кратность 4 (12px) */
+    gap: 8px; /* Изменено под кратность 4 (8px) */
+    position: relative;
+}
+
+.browser-header .dot {
+    width: 8px; /* Изменено под кратность 4 (8px) */
+    height: 8px; /* Изменено под кратность 4 (8px) */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.browser-header .dot.red { background: #ff5f56; }
+.browser-header .dot.yellow { background: #ffbd2e; }
+.browser-header .dot.green { background: #27c93f; }
+
+/* Адресная строка */
+.browser-address {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+    color: var(--text-secondary);
+    background: #ffffff;
+    padding: 4px 20px; /* Изменено под кратность 4 (4px и 20px) */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    max-width: 140px; /* Кратность 4 (140px) */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font-sans);
+    text-align: center;
+}
+
+/* Контент браузера со скриншотом */
+.browser-content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.browser-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top; /* Выравнивание по верху сайта */
+    transition: var(--transition-smooth);
+}
+
+/* Инфо-колонна */
+.project-info-wrapper {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.project-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.75rem; /* Кратность 4 (12px) */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem; /* Изменено под кратность 4 (20px) */
+}
+
+.project-year {
+    background: var(--accent-light);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem; /* Изменено под кратность 4 (4px и 12px) */
+    border: 1px solid var(--card-border);
+}
+
+.project-name {
+    font-family: var(--font-serif);
+    font-size: 2.25rem; /* Изменено под кратность 4 (36px) */
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.25rem; /* Изменено под кратность 4 (20px) */
+    color: var(--text-primary);
+}
+
+.project-description {
+    color: #2b3a31; /* Более темный контрастный серый для легкого чтения */
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Теги технологий */
+.project-stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Изменено под кратность 4 (8px) */
+}
+
+.project-stack-tags span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+    padding: 0.25rem 0.75rem; /* Изменено под кратность 4 (4px и 12px) */
+    font-weight: 500;
+}
+
+/* ==========================================
+   КОНТАКТЫ И ФУТЕР
+   ========================================== */
+.contact {
+    padding: 8rem 0;
+    text-align: center;
+}
+
+.contact-section-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem; /* Изменено под кратность 4 (36px) */
+}
+
+.contact-title {
+    font-family: var(--font-serif);
+    font-size: 3.75rem; /* Изменено под кратность 4 (60px) */
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text-primary);
+    letter-spacing: -1.5px;
+}
+
+.contact-email-link {
+    font-family: var(--font-serif);
+    font-size: 3.25rem; /* Изменено под кратность 4 (52px) */
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.25rem; /* Изменено под кратность 4 (4px) */
+    transition: var(--transition-smooth);
+}
+
+.contact-email-link:hover {
+    color: var(--accent);
+    border-color: var(--text-primary);
+}
+
+.contact-socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+}
+
+.social-link:hover {
+    color: var(--text-primary);
+}
+
+footer {
+    padding: 5rem 0 3rem 0;
+    border-top: 1px solid var(--card-border);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Изменено под кратность 4 (12px) */
+}
+
+.footer-brand .logo {
+    font-size: 1.25rem; /* Изменено под кратность 4 (20px) */
+}
+
+.copyright {
+    color: var(--text-secondary);
+    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+}
+
+.footer-links-simple {
+    display: flex;
+    align-items: center;
+}
+
+.footer-telegram-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem; /* Изменено под кратность 4 (16px) */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+}
+
+.footer-telegram-link:hover {
+    color: var(--text-primary);
+}
+
+/* ==========================================
+   АДАПТИВНОСТЬ
+   ========================================== */
+@media (max-width: 768px) {
+    /* Ограничиваем боковые поля контейнера для экономии места на экранах смартфонов */
+    .container {
+        padding: 0 1.25rem; /* Изменено под кратность 4 (20px) */
+    }
+
+    /* Шапка сайта */
+    .nav-container {
+        padding: 1.25rem 1.25rem; /* Изменено под кратность 4 (20px) */
+    }
+
+    nav a {
+        margin-left: 1.25rem; /* Изменено под кратность 4 (20px) */
+        font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+    }
+
+    /* Главный экран (Hero) - вертикальный стек с левым выравниванием */
+    .hero {
+        flex-direction: column; /* Текст сверху, фото снизу */
+        gap: 3rem;
+        text-align: left;
+        align-items: flex-start;
+        padding: 4rem 0 6rem 0;
+        min-height: auto; /* Сбрасываем фиксированную высоту экрана */
+    }
+
+    .hero-content {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.5rem; /* Изменено под кратность 4 (40px) */
+        line-height: 1.15;
+        letter-spacing: -1.5px;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem; /* Изменено под кратность 4 (16px) */
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 100%;
+    }
+
+    .hero-actions {
+        width: 100%;
+        flex-direction: column; /* Кнопки одна под другой для удобства нажатия пальцем */
+        gap: 0.75rem; /* Изменено под кратность 4 (12px) */
+    }
+
+    .btn {
+        width: 100%; /* Растягиваем кнопки на всю ширину экрана */
+        text-align: center;
+        padding: 1rem 1.5rem;
+    }
+
+    .hero-photo-container {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .hero-photo-placeholder {
+        width: 100%; /* Фото занимает всю ширину с ограничением */
+        max-width: 360px;
+        height: 380px; /* Сохраняем книжные пропорции портрета */
+    }
+
+    /* Портфолио */
+    .portfolio-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--card-border);
+    }
+    
+    .filter-group {
+        width: 100%;
+        gap: 1.25rem;
+        overflow-x: auto; /* Скролл только категорий */
+        padding-bottom: 0.5rem;
+    }
+
+    .sort-group {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end; /* Кнопка сортировки прижимается вправо снизу */
+    }
+    
+    .filter-btn {
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+    
+    .filter-btn::after {
+        bottom: -12px;
+    }
+
+    .sort-btn {
+        font-size: 0.85rem;
+    }
+
+    .project-stack {
+        gap: 4rem;
+    }
+
+    .project-row {
+        flex-direction: column; /* Складываем карточку вертикально */
+        gap: 1.75rem; /* Изменено под кратность 4 (28px) */
+        padding: 1.5rem;
+    }
+
+    .project-image-wrapper {
+        height: 240px; /* Уменьшаем высоту превью */
+        padding: 1.25rem 1.25rem 0 1.25rem; /* Изменено под кратность 4 (20px) */
+    }
+
+    .project-info-wrapper {
+        width: 100%;
+    }
+
+    .project-name {
+        font-size: 1.75rem; /* Изменено под кратность 4 (28px) */
+        margin-bottom: 0.75rem; /* Изменено под кратность 4 (12px) */
+    }
+
+    .project-description {
+        font-size: 1rem; /* Изменено под кратность 4 (16px) */
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-meta {
+        margin-bottom: 0.75rem; /* Изменено под кратность 4 (12px) */
+    }
+
+    /* Контакты */
+    .contact {
+        padding: 5rem 0;
+    }
+
+    .contact-section-inner {
+        align-items: flex-start; /* Выравнивание по левому краю для единства сетки */
+        text-align: left;
+        gap: 1.75rem; /* Изменено под кратность 4 (28px) */
+    }
+
+    .contact-title {
+        font-size: 2.5rem; /* Изменено под кратность 4 (40px) */
+        letter-spacing: -1px;
+    }
+
+    .contact-email-link {
+        font-size: clamp(1.2rem, 6.2vw, 1.8rem); /* Адаптивный размер, чтобы имейл не переносился */
+        width: 100%;
+        border-bottom-width: 1.5px;
+        padding-bottom: 0.2rem;
+    }
+
+    .contact-socials {
+        margin-top: 1rem;
+    }
+
+    /* Подвал */
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start; /* Выравниваем по левому краю */
+        text-align: left;
+        gap: 2rem;
+    }
+
+    .footer-links-simple {
+        margin-top: 0.5rem;
+    }
+}
+
+/* ==========================================
+   ПОДСКАЗКА КОПИРОВАНИЯ (Tooltip)
+   ========================================== */
+.copy-tooltip {
+    position: absolute;
+    background: var(--text-primary);
+    color: #ffffff;
+    padding: 0.5rem 1.25rem; /* Изменено под кратность 4 (8px и 20px) */
+    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
+    font-weight: 600;
+    font-family: var(--font-sans);
+    border-radius: 0px; /* Строго острые углы */
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px); /* Изменено под кратность 4 (8px) */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(27, 38, 32, 0.15);
+}
+
+.copy-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================
+   ПЕРЕКЛЮЧАТЕЛЬ ВАЙБА (Vibe Switcher)
+   ========================================== */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.vibe-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-left: 2rem;
+}
+
+.vibe-dot {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    position: relative;
+}
+
+.vibe-dot::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Цвета точек сезонов */
+.vibe-dot.summer { color: #5b806d; }
+.vibe-dot.spring { color: #a3676e; }
+.vibe-dot.autumn { color: #b0623a; }
+.vibe-dot.winter { color: #5c7485; }
+
+/* Ховер и активное состояние */
+.vibe-dot:hover::before {
+    opacity: 0.7;
+    transform: scale(1.3);
+}
+
+.vibe-dot.active::before {
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+    .vibe-switcher {
+        margin-left: 1rem;
+    }
+}

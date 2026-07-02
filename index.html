@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Творческое Портфолио | UX/UI Дизайнер</title>
+    <!-- Подключаем элегантный шрифт Playfair Display и минималистичный Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=42">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="glass-nav">
+        <div class="nav-container">
+            <a href="#about" class="logo">Maro<span>UXUI</span></a>
+            <nav>
+                <a href="#about" class="nav-link">Обо мне</a>
+                <a href="#portfolio" class="nav-link">Работы</a>
+                <a href="#contact" class="nav-link">Контакты</a>
+                <div class="vibe-switcher">
+                    <button class="vibe-dot summer active" data-vibe="summer" title="Лето (Береза)"></button>
+                    <button class="vibe-dot spring" data-vibe="spring" title="Весна (Сакура)"></button>
+                    <button class="vibe-dot autumn" data-vibe="autumn" title="Осень (Клен)"></button>
+                    <button class="vibe-dot winter" data-vibe="winter" title="Зима (Снег)"></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Главный экран (Hero) -->
+        <section id="about" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Роман Небесных — проектирую интерфейсы, в которых <span class="text-gradient">всё на своих местах</span></h1>
+                <p class="hero-subtitle">Привет! Я UX/UI-дизайнер. Помогаю превращать сложные цифровые продукты в простые, ясные и спокойные пользовательские сценарии.</p>
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn btn-primary">Смотреть работы</a>
+                    <a href="#contact" class="btn btn-secondary">Связаться</a>
+                </div>
+            </div>
+            <div class="hero-photo-container">
+                <div class="hero-photo-placeholder">
+                    <img src="roman.webp?v=1" alt="Роман Небесных" class="hero-photo-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Портфолио (Стек проектов во всю ширину) -->
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Избранные проекты</h2>
+            
+            <div class="portfolio-filters">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">Все проекты</button>
+                    <button class="filter-btn" data-filter="web">Сайты и Сервисы</button>
+                    <button class="filter-btn" data-filter="promo">События и Промо</button>
+                </div>
+                <div class="sort-group">
+                    <button class="sort-btn desc" id="sort-toggle">Свежие сверху</button>
+                </div>
+            </div>
+            
+            <div class="project-stack">
+                <!-- Проект 1: Metronome Fest 2026 (Дата: 2026-02) -->
+                <a href="https://metronome.bar/events/fest2026" target="_blank" class="project-row glass-card" data-category="promo" data-date="2026-02">
+                    <div class="project-image-wrapper mockup-bg-gray">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <div class="browser-address">metronome.bar/fest2026</div>
+                            </div>
+                            <div class="browser-content">
+                                <img src="metronome_fest.webp?v=1" alt="Metronome Fest Screenshot" class="card-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-wrapper">
+                        <div class="project-meta">
+                            <span class="project-year">2026</span>
+                            <span class="project-type">Промо-страница / Фестиваль</span>
+                        </div>
+                        <h3 class="project-name">Metronome Fest 2026</h3>
+                        <p class="project-description">Интерактивный сайт фестиваля виртуальной реальности 2026 года. Адаптивная верстка, сложные анимации, передача атмосферы цифрового кибер-ивента.</p>
+                        <div class="project-stack-tags">
+                            <span>Interactive Design</span>
+                            <span>Event Landing</span>
+                            <span>Web Animations</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Проект 2: Софья и Руслан (Дата: 2025-09) -->
+                <a href="https://xn-----8kc4aqnbtefvh8hvb.xn--p1ai/" target="_blank" class="project-row glass-card" data-category="promo" data-date="2025-09">
+                    <div class="project-image-wrapper mockup-bg-sand">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <div class="browser-address">софья-и-руслан.рф</div>
+                            </div>
+                            <div class="browser-content">
+                                <img src="sofya_ruslan.webp?v=1" alt="Софья и Руслан" class="card-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-wrapper">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type">Промо-страница / Свадьба</span>
+                        </div>
+                        <h3 class="project-name">Софья и Руслан</h3>
+                        <p class="project-description">Интерактивный свадебный лендинг-приглашение для гостей. Элегантная эстетика, RSVP-система подтверждения присутствия, детальное расписание и карта свадебных локаций.</p>
+                        <div class="project-stack-tags">
+                            <span>UI/UX Design</span>
+                            <span>RSVP System</span>
+                            <span>Webflow</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Проект 3: VTuber Awards (Дата: 2025-08) -->
+                <a href="https://vtuberawards.ru/" target="_blank" class="project-row glass-card" data-category="web" data-date="2025-08">
+                    <div class="project-image-wrapper mockup-bg-sage">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <div class="browser-address">vtuberawards.ru</div>
+                            </div>
+                            <div class="browser-content">
+                                <img src="vtuber_awards.webp?v=1" alt="VTuber Awards Screenshot" class="card-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-wrapper">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type">Промо-страница / Премия</span>
+                        </div>
+                        <h3 class="project-name">VTuber Awards</h3>
+                        <p class="project-description">Официальный сайт ежегодной российской премии независимых виртуальных стримеров (VTuber Awards). Разработка яркого интерактивного интерфейса для презентации участников и голосования.</p>
+                        <div class="project-stack-tags">
+                            <span>UI/UX Design</span>
+                            <span>Interactive UI</span>
+                            <span>Frontend Dev</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Проект 4: Metronome Bar (Дата: 2025-03) -->
+                <a href="https://metronome.bar/" target="_blank" class="project-row glass-card" data-category="web" data-date="2025-03">
+                    <div class="project-image-wrapper mockup-bg-mint">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <div class="browser-address">metronome.bar</div>
+                            </div>
+                            <div class="browser-content">
+                                <img src="metronome_bar.webp?v=1" alt="Metronome Bar Screenshot" class="card-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-wrapper">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type">Сайт-визитка / Магазин</span>
+                        </div>
+                        <h3 class="project-name">Metronome Bar</h3>
+                        <p class="project-description">Официальный сайт и интернет-магазин русскоязычного VR-комьюнити. Разработка интерфейса с нуля с интеграцией электронной коммерции и VR-тематики.</p>
+                        <div class="project-stack-tags">
+                            <span>UI/UX Design</span>
+                            <span>E-Commerce</span>
+                            <span>Webflow</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contact" class="contact">
+            <div class="contact-section-inner">
+                <h2 class="contact-title">Есть проект?</h2>
+                <a href="mailto:nebesneeh21@gmail.com" class="contact-email-link">nebesneeh21@gmail.com</a>
+                
+                <div class="contact-socials">
+                    <a href="https://t.me/he4ven1y" target="_blank" class="social-link">[ Telegram ]</a>
+                    <a href="https://vk.com/he4ven1y" target="_blank" class="social-link">[ ВКонтакте ]</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <a href="#about" class="logo">Maro<span>UXUI</span></a>
+                    <p class="copyright">&copy; 2026 MaroUXUI.</p>
+                </div>
+                <div class="footer-links-simple">
+                    <a href="https://t.me/he4ven1y" target="_blank" class="footer-telegram-link">Telegram</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js?v=42"></script>
+</body>
+</html>
