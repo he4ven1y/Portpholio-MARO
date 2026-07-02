@@ -242,6 +242,7 @@ function initVibeSystem() {
 
             if (this.y > canvas.height + 40) {
                 if (this.state === 'active') {
+                    if (this.isClickSpawn) return false; // Частицы от клика исчезают навсегда (предотвращаем утечку памяти и FPS)
                     this.y = -40;
                     this.x = Math.random() * canvas.width;
                 } else {
@@ -374,11 +375,18 @@ function initVibeSystem() {
             return;
         }
 
+        // Защита от спама кликами (чтобы не перегрузить сайт): разрешаем максимум +30 частиц сверх нормы
+        const targetCount = Math.floor((canvas.width * canvas.height / 10000) * vibeConfigs[currentVibe].density);
+        if (particles.length > targetCount + 30) {
+            return;
+        }
+
         clickCounter++;
         if (clickCounter % 3 === 0) {
             const spawnCount = Math.floor(Math.random() * 2) + 2; // спавним 2-3 частицы
             for (let i = 0; i < spawnCount; i++) {
                 const p = new Particle(true, Math.random() * canvas.height);
+                p.isClickSpawn = true; // Отмечаем частицу как "одноразовую"
                 
                 // Гарантируем появление объектов РАЗНЫХ размеров, принудительно распределяя слои глубины
                 p.z = i % 3; // 0 - мелкий, 1 - средний, 2 - крупный
