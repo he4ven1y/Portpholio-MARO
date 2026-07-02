@@ -368,7 +368,7 @@ function initVibeSystem() {
         if (clickCounter % 3 === 0) {
             const spawnCount = Math.floor(Math.random() * 2) + 2; // спавним 2-3 частицы
             for (let i = 0; i < spawnCount; i++) {
-                const p = new Particle(true, e.clientY);
+                const p = new Particle(true, Math.random() * canvas.height);
                 
                 // Гарантируем появление объектов РАЗНЫХ размеров, принудительно распределяя слои глубины
                 p.z = i % 3; // 0 - мелкий, 1 - средний, 2 - крупный
@@ -387,7 +387,7 @@ function initVibeSystem() {
                     p.speedY = p.config.baseSpeedY * 1.7;
                 }
 
-                p.x = e.clientX + (Math.random() * 40 - 20);
+                p.x = Math.random() * canvas.width;
                 p.opacity = 0;
                 p.targetOpacity = Math.random() * 0.4 + 0.4;
                 particles.push(p);
