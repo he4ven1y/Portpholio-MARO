@@ -142,27 +142,27 @@ function initVibeSystem() {
             colors: ['#8ebfa4', '#c0d6ca', '#a5c7b4', '#ffffff'],
             path: BIRCH_PATH,
             type: 'path',
-            baseSpeedY: 0.6, // Замедлено в 2 раза
+            baseSpeedY: 0.3, // Замедлено еще раз
             density: 0.04 // Уменьшено в 2 раза (было 0.08)
         },
         spring: {
             colors: ['#fcebeb', '#e8b7b7', '#f3e4e4', '#d49a9a'],
             path: SAKURA_PATH,
             type: 'path',
-            baseSpeedY: 0.7, // Замедлено в 2 раза
+            baseSpeedY: 0.35, // Замедлено еще раз
             density: 0.05 // Уменьшено в 2 раза (было 0.1)
         },
         autumn: {
             colors: ['#bd622c', '#d9a05b', '#e2bc90', '#c97f53'],
             path: MAPLE_PATH,
             type: 'path',
-            baseSpeedY: 0.8, // Замедлено в 2 раза
+            baseSpeedY: 0.4, // Замедлено еще раз
             density: 0.04 // Уменьшено в 2 раза (было 0.08)
         },
         winter: {
             colors: ['#ffffff', '#f4f7f5', '#e6f0ff'], // Сделали более яркие и морозные цвета для видимости
             type: 'radial',
-            baseSpeedY: 0.5, // Замедлено в 2 раза
+            baseSpeedY: 0.25, // Замедлено еще раз
             density: 0.06 // Уменьшено в 2 раза (было 0.12)
         }
     };
