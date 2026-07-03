@@ -1,0 +1,8 @@
+.git
+.gitignore
+.obsidian
+Notes/
+*.bat
+*.vbs
+README.md
+walkthrough.md
