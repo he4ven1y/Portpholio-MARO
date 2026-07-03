@@ -160,6 +160,7 @@ nav a {
     font-weight: 500;
     font-size: 1rem; /* Изменено под кратность 4 (16px) */
     transition: var(--transition-smooth);
+    white-space: nowrap;
 }
 
 nav a:hover {
