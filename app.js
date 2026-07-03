@@ -133,8 +133,10 @@ function initVibeSystem() {
     const BIRCH_PATH = new Path2D("M0,-10 C0,-10 2,-7 3,-6 L2,-5 C4,-3 6,-2 7,0 L5.5,1 C7,3 8,5 7.5,7 C7,9 4,10 0,10 C-4,10 -7,9 -7.5,7 C-8,5 -7,3 -5.5,1 L-7,0 C-6,-2 -4,-3 -2,-5 L-3,-6 C-2,-7 0,-10 0,-10 Z");
     // Весна (Лепесток сакуры)
     const SAKURA_PATH = new Path2D("M0,-8 C3,-8 6,-4 5,1 C4,5 2,8 0,8 C-2,8 -4,5 -5,1 C-6,-4 -3,-8 0,-8 Z");
-    // Осень (Лист клена)
-    const MAPLE_PATH = new Path2D("M0,-10 L2,-6 L5,-7 L4,-3 L8,-1 L3,1 L5,6 L0,3 L-5,6 L-3,1 L-8,-1 L-4,-3 L-6,-7 L-2,-6 Z");
+    // Осень (Детализированный лист клена)
+    const MAPLE_PATH = new Path2D("M0,-12 L2,-7 L7,-9 L5,-3 L10,-1 L5,2 L7,9 L2,6 L0,15 L-2,6 L-7,9 L-5,2 L-10,-1 L-5,-3 L-7,-9 L-2,-7 Z");
+    // Зима (Кристальная 6-конечная снежинка)
+    const SNOWFLAKE_PATH = new Path2D("M0,-12 L2,-9 L5,-9 L3,-5 L8,-2 L5,0 L8,2 L3,5 L5,9 L2,9 L0,12 L-2,9 L-5,9 L-3,5 L-8,2 L-5,0 L-8,-2 L-3,-5 L-5,-9 L-2,-9 Z");
 
     // 4. Конфигурация сезонов
     const vibeConfigs = {
@@ -161,7 +163,8 @@ function initVibeSystem() {
         },
         winter: {
             colors: ['#ffffff', '#f4f7f5', '#e6f0ff'], // Сделали более яркие и морозные цвета для видимости
-            type: 'radial',
+            path: SNOWFLAKE_PATH,
+            type: 'path',
             baseSpeedY: 0.25, // Замедлено еще раз
             density: 0.06 // Уменьшено в 2 раза (было 0.12)
         }
@@ -220,6 +223,7 @@ function initVibeSystem() {
             this.rotationSpeed = (Math.random() * 0.04 - 0.02) * (this.z + 1); // Увеличено под новую скорость
             this.swaySpeed = Math.random() * 0.03 + 0.016; // Увеличено под новую скорость
             this.swayOffset = Math.random() * Math.PI * 2;
+            this.windForce = (Math.random() - 0.5) * 0.8; // Хаотичный снос ветром в сторону
         }
 
         update() {
@@ -236,8 +240,10 @@ function initVibeSystem() {
             }
 
             this.y += this.speedY;
+            this.x += this.windForce; // Постоянный снос ветром
             this.swayOffset += this.swaySpeed;
-            this.currentX = this.x + Math.sin(this.swayOffset) * this.swayRange;
+            // Сложная хаотичная траектория (комбинация синусов) вместо простого маятника
+            this.currentX = this.x + Math.sin(this.swayOffset) * this.swayRange + Math.cos(this.swayOffset * 0.6) * (this.swayRange * 0.5);
             this.rotation += this.rotationSpeed;
 
             if (this.y > canvas.height + 40) {
