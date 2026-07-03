@@ -133,10 +133,10 @@ function initVibeSystem() {
     const BIRCH_PATH = new Path2D("M0,-10 C0,-10 2,-7 3,-6 L2,-5 C4,-3 6,-2 7,0 L5.5,1 C7,3 8,5 7.5,7 C7,9 4,10 0,10 C-4,10 -7,9 -7.5,7 C-8,5 -7,3 -5.5,1 L-7,0 C-6,-2 -4,-3 -2,-5 L-3,-6 C-2,-7 0,-10 0,-10 Z");
     // Весна (Лепесток сакуры)
     const SAKURA_PATH = new Path2D("M0,-8 C3,-8 6,-4 5,1 C4,5 2,8 0,8 C-2,8 -4,5 -5,1 C-6,-4 -3,-8 0,-8 Z");
-    // Осень (Детализированный лист клена)
-    const MAPLE_PATH = new Path2D("M0,-12 L2,-7 L7,-9 L5,-3 L10,-1 L5,2 L7,9 L2,6 L0,15 L-2,6 L-7,9 L-5,2 L-10,-1 L-5,-3 L-7,-9 L-2,-7 Z");
-    // Зима (Кристальная 6-конечная снежинка)
-    const SNOWFLAKE_PATH = new Path2D("M0,-12 L2,-9 L5,-9 L3,-5 L8,-2 L5,0 L8,2 L3,5 L5,9 L2,9 L0,12 L-2,9 L-5,9 L-3,5 L-8,2 L-5,0 L-8,-2 L-3,-5 L-5,-9 L-2,-9 Z");
+    // Осень (Массивный реалистичный лист клена как на референсе)
+    const MAPLE_PATH = new Path2D("M 4,15 L 2,10 L 6,11 L 10,9 L 14,5 L 11,2 L 16,-2 L 14,-6 L 8,-5 L 10,-12 L 3,-8 L 0,-16 L -3,-8 L -10,-12 L -8,-5 L -14,-6 L -16,-2 L -11,2 L -14,5 L -10,9 L -6,11 L -2,10 L 0,15 Z");
+    // Зима (Один луч кристальной снежинки из референса, будет дублирован 6 раз)
+    const SNOWFLAKE_ARM = new Path2D("M0,0 L1.5,-3 L5,-3 L5,-5 L1.5,-5 L1.5,-9 L5,-12.5 L3.5,-14 L1.5,-12 L1.5,-16 L-1.5,-16 L-1.5,-12 L-3.5,-14 L-5,-12.5 L-1.5,-9 L-1.5,-5 L-5,-5 L-5,-3 L-1.5,-3 Z");
 
     // 4. Конфигурация сезонов
     const vibeConfigs = {
@@ -163,8 +163,8 @@ function initVibeSystem() {
         },
         winter: {
             colors: ['#ffffff', '#f4f7f5', '#e6f0ff'], // Сделали более яркие и морозные цвета для видимости
-            path: SNOWFLAKE_PATH,
-            type: 'path',
+            path: SNOWFLAKE_ARM,
+            type: 'snowflake',
             baseSpeedY: 0.25, // Замедлено еще раз
             density: 0.06 // Уменьшено в 2 раза (было 0.12)
         }
@@ -276,6 +276,17 @@ function initVibeSystem() {
                 const scaleFactor = this.size / 15;
                 ctx.scale(scaleFactor, scaleFactor);
                 ctx.fill(this.config.path);
+            } else if (this.config.type === 'snowflake') {
+                ctx.fillStyle = this.color;
+                const scaleFactor = this.size / 15;
+                ctx.scale(scaleFactor, scaleFactor);
+                // Дублируем луч 6 раз по кругу, чтобы собрать снежинку
+                for(let i = 0; i < 6; i++) {
+                    ctx.save();
+                    ctx.rotate((Math.PI / 3) * i);
+                    ctx.fill(this.config.path);
+                    ctx.restore();
+                }
             } else if (this.config.type === 'radial') {
                 // Оптимизация снега: вместо тяжелого createRadialGradient каждый кадр 
                 // рисуем мягкий снежок двумя простыми кругами
