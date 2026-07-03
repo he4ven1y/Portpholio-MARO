@@ -142,27 +142,27 @@ function initVibeSystem() {
             colors: ['#8ebfa4', '#c0d6ca', '#a5c7b4', '#ffffff'],
             path: BIRCH_PATH,
             type: 'path',
-            baseSpeedY: 1.2, // Увеличено в 2 раза (было 0.6)
+            baseSpeedY: 0.6, // Замедлено в 2 раза
             density: 0.04 // Уменьшено в 2 раза (было 0.08)
         },
         spring: {
             colors: ['#fcebeb', '#e8b7b7', '#f3e4e4', '#d49a9a'],
             path: SAKURA_PATH,
             type: 'path',
-            baseSpeedY: 1.4, // Увеличено в 2 раза (было 0.7)
+            baseSpeedY: 0.7, // Замедлено в 2 раза
             density: 0.05 // Уменьшено в 2 раза (было 0.1)
         },
         autumn: {
             colors: ['#bd622c', '#d9a05b', '#e2bc90', '#c97f53'],
             path: MAPLE_PATH,
             type: 'path',
-            baseSpeedY: 1.6, // Увеличено в 2 раза (было 0.8)
+            baseSpeedY: 0.8, // Замедлено в 2 раза
             density: 0.04 // Уменьшено в 2 раза (было 0.08)
         },
         winter: {
-            colors: ['rgba(255, 255, 255, 0.75)', 'rgba(180, 200, 215, 0.45)', 'rgba(230, 240, 255, 0.6)'],
+            colors: ['#ffffff', '#f4f7f5', '#e6f0ff'], // Сделали более яркие и морозные цвета для видимости
             type: 'radial',
-            baseSpeedY: 1.0, // Увеличено в 2 раза (было 0.5)
+            baseSpeedY: 0.5, // Замедлено в 2 раза
             density: 0.06 // Уменьшено в 2 раза (было 0.12)
         }
     };
@@ -275,16 +275,17 @@ function initVibeSystem() {
                 // рисуем мягкий снежок двумя простыми кругами
                 
                 // Центр снежинки (плотный)
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.globalAlpha = depthAlpha * 0.9;
+                ctx.fillStyle = '#ffffff';
                 ctx.beginPath();
-                ctx.arc(0, 0, this.size * 0.4, 0, Math.PI * 2);
+                ctx.arc(0, 0, this.size * 0.5, 0, Math.PI * 2);
                 ctx.fill();
                 
                 // Ореол снежинки (мягкий)
+                ctx.globalAlpha = depthAlpha * 0.5;
                 ctx.fillStyle = this.color;
-                ctx.globalAlpha = depthAlpha * 0.4;
                 ctx.beginPath();
-                ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                ctx.arc(0, 0, this.size * 1.2, 0, Math.PI * 2);
                 ctx.fill();
             }
 
