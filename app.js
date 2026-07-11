@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initEmailCopy();
     initVibeSystem();
     initPortfolioFilters();
-    initPortfolioSorting();
     initCarouselTouchPause();
 });
 
@@ -476,71 +475,6 @@ function initPortfolioFilters() {
     });
 }
 
-/**
- * Инициализация сортировки портфолио по дате (свежести)
- * Сортирует карточки проектов с плавным угасанием и проявлением контента
- */
-function initPortfolioSorting() {
-    const sortToggle = document.getElementById('sort-toggle');
-    const projectStack = document.querySelector('.carousel-track');
-    
-    if (!sortToggle || !projectStack) return;
-
-    function sortProjects(order) {
-        const originals = Array.from(projectStack.querySelectorAll('.project-row:not([aria-hidden="true"])'));
-        const duplicates = Array.from(projectStack.querySelectorAll('.project-row[aria-hidden="true"]'));
-
-        const sortFn = (a, b) => {
-            const dateA = a.dataset.date || '';
-            const dateB = b.dataset.date || '';
-            return order === 'desc' ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
-        };
-
-        originals.sort(sortFn);
-        duplicates.sort(sortFn);
-
-        const allProjects = [...originals, ...duplicates];
-
-        // Плавно гасим проекты перед перестроением
-        allProjects.forEach(project => {
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(10px)';
-        });
-
-        // Ждем пока они растворятся, затем меняем порядок и плавно показываем
-        setTimeout(() => {
-            allProjects.forEach(project => {
-                projectStack.appendChild(project);
-            });
-            
-            // Задержка для триггера перерисовки браузером
-            setTimeout(() => {
-                allProjects.forEach(project => {
-                    // Показываем только те, которые не скрыты текущим фильтром категорий
-                    if (project.style.display !== 'none') {
-                        project.style.opacity = '1';
-                        project.style.transform = 'translateY(0)';
-                    }
-                });
-            }, 50);
-        }, 200);
-    }
-
-    sortToggle.addEventListener('click', () => {
-        const isDesc = sortToggle.classList.contains('desc');
-        if (isDesc) {
-            sortToggle.classList.remove('desc');
-            sortToggle.classList.add('asc');
-            sortToggle.textContent = 'Старые сверху';
-            sortProjects('asc');
-        } else {
-            sortToggle.classList.remove('asc');
-            sortToggle.classList.add('desc');
-            sortToggle.textContent = 'Свежие сверху';
-            sortProjects('desc');
-        }
-    });
-}
 
 /**
  * Инициализация паузы карусели при касании пальцем на мобильных устройствах
