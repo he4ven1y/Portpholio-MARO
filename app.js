@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initVibeSystem();
     initPortfolioFilters();
     initPortfolioSorting();
+    initCarouselTouchPause();
 });
 
 /**
@@ -541,3 +542,22 @@ function initPortfolioSorting() {
     });
 }
 
+/**
+ * Инициализация паузы карусели при касании пальцем на мобильных устройствах
+ */
+function initCarouselTouchPause() {
+    const track = document.querySelector('.carousel-track');
+    if (!track) return;
+
+    track.addEventListener('touchstart', () => {
+        track.style.animationPlayState = 'paused';
+    }, { passive: true });
+
+    track.addEventListener('touchend', () => {
+        track.style.animationPlayState = '';
+    });
+
+    track.addEventListener('touchcancel', () => {
+        track.style.animationPlayState = '';
+    });
+}
