@@ -466,73 +466,57 @@ nav a:hover {
     background: #f0eae1; /* Мягкий персиково-песочный фон */
 }
 
-/* Браузерный мокап */
-.browser-mockup {
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-bottom: none;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 8px 24px rgba(27, 38, 32, 0.04);
-    transition: var(--transition-smooth);
-}
-
-/* Шапка браузера */
-.browser-header {
-    height: 28px; /* Кратность 4 (28px) */
-    background: #f1f3f2;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-    padding: 0 12px; /* Кратность 4 (12px) */
-    gap: 8px; /* Изменено под кратность 4 (8px) */
+/* 3D Ноутбук Мокап */
+.laptop-3d-mockup {
+    width: 120%; /* Делаем ноутбук крупнее внутри карточки */
+    margin-bottom: -10%; /* Опускаем его чуть ниже */
+    aspect-ratio: 1200 / 800;
+    background-image: url('mokap.png');
+    background-size: cover;
+    background-position: center;
     position: relative;
+    transition: var(--transition-smooth);
 }
 
-.browser-header .dot {
-    width: 8px; /* Изменено под кратность 4 (8px) */
-    height: 8px; /* Изменено под кратность 4 (8px) */
-    border-radius: 50%;
-    display: inline-block;
+.laptop-3d-mockup:hover {
+    transform: translateY(-8px) scale(1.02);
 }
 
-.browser-header .dot.red { background: #ff5f56; }
-.browser-header .dot.yellow { background: #ffbd2e; }
-.browser-header .dot.green { background: #27c93f; }
-
-/* Адресная строка */
-.browser-address {
+.laptop-screen-wrapper {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.75rem; /* Изменено под кратность 4 (12px) */
-    color: var(--text-secondary);
-    background: #ffffff;
-    padding: 4px 20px; /* Изменено под кратность 4 (4px и 20px) */
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    max-width: 140px; /* Кратность 4 (140px) */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-family: var(--font-sans);
-    text-align: center;
-}
-
-/* Контент браузера со скриншотом */
-.browser-content {
-    flex: 1;
-    overflow: hidden;
-}
-
-.browser-content img {
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top; /* Выравнивание по верху сайта */
-    transition: var(--transition-smooth);
+    perspective: 1090px;
+    pointer-events: none;
+}
+
+.laptop-screen {
+    position: absolute;
+    /* Точные координаты с калибратора, переведенные в проценты */
+    left: 40.833%;
+    top: 23.562%;
+    width: 38%;
+    height: 41.625%;
+    transform-origin: top left;
+    transform: rotateX(-3.2deg) rotateY(-8.9deg) rotateZ(1.3deg) skewX(-1deg) skewY(1.3deg);
+    overflow: hidden;
+    pointer-events: auto; /* Позволяет скроллить картинку внутри! */
+    background: #000;
+    border-radius: 2px;
+}
+
+.laptop-screen img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 2s ease;
+}
+
+/* Эффект авто-скролла длинных скриншотов при наведении */
+.laptop-screen:hover img {
+    transform: translateY(calc(-100% + 100%)); /* Можно доработать для длинных страниц */
 }
 
 /* Инфо-колонна */
