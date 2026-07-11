@@ -413,27 +413,30 @@ nav a:hover {
 
 /* Горизонтальная карусель проектов */
 .carousel-container {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%); /* Выход за пределы контейнера на всю ширину экрана */
-    overflow: hidden; /* Скрываем общий оверфлоу */
+    width: 100%; /* Ширина по контенту (.container) */
+    overflow: hidden;
     padding: 2rem 0 4rem 0;
     position: relative;
+    /* Магия: Плавная прозрачность по бокам */
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
 .carousel-track {
     display: flex;
+    width: max-content;
     gap: 2rem;
-    padding: 0 4rem; /* Отступы по краям для красоты */
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    /* Скрываем ползунок скролла */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    padding: 0;
+    animation: scrollCarousel 40s linear infinite;
 }
 
-.carousel-track::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollCarousel {
+    0% { transform: translateX(calc(-50% - 1rem)); }
+    100% { transform: translateX(0); }
 }
 
 /* Вертикальная карточка проекта */
@@ -449,7 +452,6 @@ nav a:hover {
     background: var(--card-bg);
     padding: 1.5rem;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, opacity 0.4s ease;
-    scroll-snap-align: center; /* Центрируем при скролле */
 }
 
 .project-row:hover {

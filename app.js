@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initVibeSystem();
     initPortfolioFilters();
     initPortfolioSorting();
-    initCarouselAutoScroll();
 });
 
 /**
@@ -487,34 +486,35 @@ function initPortfolioSorting() {
     if (!sortToggle || !projectStack) return;
 
     function sortProjects(order) {
-        const projects = Array.from(projectStack.querySelectorAll('.project-row'));
+        const originals = Array.from(projectStack.querySelectorAll('.project-row:not([aria-hidden="true"])'));
+        const duplicates = Array.from(projectStack.querySelectorAll('.project-row[aria-hidden="true"]'));
 
-        projects.sort((a, b) => {
+        const sortFn = (a, b) => {
             const dateA = a.dataset.date || '';
             const dateB = b.dataset.date || '';
-            
-            if (order === 'desc') {
-                return dateB.localeCompare(dateA); // Свежие сверху (по убыванию)
-            } else {
-                return dateA.localeCompare(dateB); // Старые сверху (по возрастанию)
-            }
-        });
+            return order === 'desc' ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
+        };
+
+        originals.sort(sortFn);
+        duplicates.sort(sortFn);
+
+        const allProjects = [...originals, ...duplicates];
 
         // Плавно гасим проекты перед перестроением
-        projects.forEach(project => {
+        allProjects.forEach(project => {
             project.style.opacity = '0';
             project.style.transform = 'translateY(10px)';
         });
 
         // Ждем пока они растворятся, затем меняем порядок и плавно показываем
         setTimeout(() => {
-            projects.forEach(project => {
+            allProjects.forEach(project => {
                 projectStack.appendChild(project);
             });
             
             // Задержка для триггера перерисовки браузером
             setTimeout(() => {
-                projects.forEach(project => {
+                allProjects.forEach(project => {
                     // Показываем только те, которые не скрыты текущим фильтром категорий
                     if (project.style.display !== 'none') {
                         project.style.opacity = '1';
@@ -541,45 +541,3 @@ function initPortfolioSorting() {
     });
 }
 
-/**
- * Инициализация плавного автоскролла карусели.
- * Движется влево-вправо как маятник, останавливается при наведении.
- */
-function initCarouselAutoScroll() {
-    const track = document.getElementById('portfolio-track');
-    if (!track) return;
-
-    let isHovered = false;
-    let scrollDirection = 1; // 1 = вправо, -1 = влево
-    let scrollSpeed = 0.5; // скорость пикселей за кадр
-    let animationFrameId;
-
-    // Пауза при наведении
-    track.addEventListener('mouseenter', () => { isHovered = true; });
-    track.addEventListener('mouseleave', () => { isHovered = false; });
-    
-    // Пауза при касании пальцем на мобилках
-    track.addEventListener('touchstart', () => { isHovered = true; }, {passive: true});
-    track.addEventListener('touchend', () => { 
-        setTimeout(() => { isHovered = false; }, 1000); 
-    });
-
-    function scrollLoop() {
-        if (!isHovered) {
-            track.scrollLeft += scrollSpeed * scrollDirection;
-
-            // Если дошли до правого края (с небольшим запасом)
-            if (scrollDirection === 1 && track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
-                scrollDirection = -1; // Меняем направление
-            }
-            // Если дошли до левого края
-            else if (scrollDirection === -1 && track.scrollLeft <= 0) {
-                scrollDirection = 1; // Меняем направление
-            }
-        }
-        animationFrameId = requestAnimationFrame(scrollLoop);
-    }
-
-    // Запускаем
-    animationFrameId = requestAnimationFrame(scrollLoop);
-}
