@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardTilt();
     initEmailCopy();
     initVibeSystem();
+    initPortfolioFilters();
+    initPortfolioSorting();
+    initCarouselAutoScroll();
 });
 
 /**
@@ -479,7 +482,7 @@ function initPortfolioFilters() {
  */
 function initPortfolioSorting() {
     const sortToggle = document.getElementById('sort-toggle');
-    const projectStack = document.querySelector('.project-stack');
+    const projectStack = document.querySelector('.carousel-track');
     
     if (!sortToggle || !projectStack) return;
 
@@ -538,3 +541,45 @@ function initPortfolioSorting() {
     });
 }
 
+/**
+ * Инициализация плавного автоскролла карусели.
+ * Движется влево-вправо как маятник, останавливается при наведении.
+ */
+function initCarouselAutoScroll() {
+    const track = document.getElementById('portfolio-track');
+    if (!track) return;
+
+    let isHovered = false;
+    let scrollDirection = 1; // 1 = вправо, -1 = влево
+    let scrollSpeed = 0.5; // скорость пикселей за кадр
+    let animationFrameId;
+
+    // Пауза при наведении
+    track.addEventListener('mouseenter', () => { isHovered = true; });
+    track.addEventListener('mouseleave', () => { isHovered = false; });
+    
+    // Пауза при касании пальцем на мобилках
+    track.addEventListener('touchstart', () => { isHovered = true; }, {passive: true});
+    track.addEventListener('touchend', () => { 
+        setTimeout(() => { isHovered = false; }, 1000); 
+    });
+
+    function scrollLoop() {
+        if (!isHovered) {
+            track.scrollLeft += scrollSpeed * scrollDirection;
+
+            // Если дошли до правого края (с небольшим запасом)
+            if (scrollDirection === 1 && track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
+                scrollDirection = -1; // Меняем направление
+            }
+            // Если дошли до левого края
+            else if (scrollDirection === -1 && track.scrollLeft <= 0) {
+                scrollDirection = 1; // Меняем направление
+            }
+        }
+        animationFrameId = requestAnimationFrame(scrollLoop);
+    }
+
+    // Запускаем
+    animationFrameId = requestAnimationFrame(scrollLoop);
+}
