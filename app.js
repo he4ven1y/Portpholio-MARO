@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardTilt();
     initEmailCopy();
     initVibeSystem();
-    initPortfolioFilters();
-    initPortfolioSorting();
 });
 
 /**
