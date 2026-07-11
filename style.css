@@ -509,14 +509,16 @@ nav a:hover {
 
 .laptop-screen img {
     width: 100%;
-    height: auto;
+    height: 100%; /* Занимает всю высоту экрана */
+    object-fit: cover;
+    object-position: top; /* По умолчанию показываем верх сайта */
     display: block;
-    transition: transform 2s ease;
+    transition: object-position 3s ease-in-out; /* Плавный скролл */
 }
 
 /* Эффект авто-скролла длинных скриншотов при наведении */
 .laptop-screen:hover img {
-    transform: translateY(calc(-100% + 100%)); /* Можно доработать для длинных страниц */
+    object-position: bottom; /* При наведении плавно прокручиваем до самого низа */
 }
 
 /* Инфо-колонна */
